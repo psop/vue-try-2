@@ -22,28 +22,30 @@
           <div class="row">
             <div class="col-md-6">
               <label for="exampleFormControlInput1" class="form-label">第一個數字</label>
-              <input id="num1" type="number" class="form-control" placeholder="請輸入要計算的第一個數字"/>
+              <input v-model.number="num1" id="num1" type="number" class="form-control" placeholder="請輸入要計算的第一個數字"/>
             </div>
             <div class="col-md-6">
               <label for="num2" class="form-label">第二個數字</label>
-              <input id="num2" type="number" class="form-control" placeholder="請輸入要計算的第二個數字"/>
+              <input v-model.number="num2" id="num2" type="number" class="form-control" placeholder="請輸入要計算的第二個數字"/>
             </div>
             <div class="col-md-12 mt-3">
               <div class="btn-group w-100">
-                <button type="button" class="btn btn-outline-primary w-25">+</button>
-                <button type="button" class="btn btn-outline-primary w-25">-</button>
-                <button type="button" class="btn btn-outline-primary w-25">*</button>
-                <button type="button" class="btn btn-outline-primary w-25">/</button>
+                <button type="button" class="btn btn-outline-primary w-25" :class=" {active: operator === '+'}" @click="operator = '+'">+</button>
+                <button type="button" class="btn btn-outline-primary w-25" :class=" {active: operator === '-'}" @click="operator = '-'">-</button>
+                <button type="button" class="btn btn-outline-primary w-25" :class=" {active: operator === '*'}" @click="operator = '*'">*</button>
+                <button type="button" class="btn btn-outline-primary w-25" :class=" {active: operator === '/'}" @click="operator = '/'">/</button>
               </div>
             </div>
           </div>
-          <button type="button" class="btn btn-outline-primary d-block mt-3 w-100">計算結果</button>
-          <h4 class="mt-3">結果：100</h4>
+          <button type="button" class="btn btn-outline-primary d-block mt-3 w-100" @click="compute">計算結果</button>
+          <h4 class="mt-3" @click='result'>結果：{{result}}</h4>
         </div>
         <div class="col-3">
           <h5>歷史紀錄</h5>
           <ul>
-            <li>1 + 1 = 2</li>
+            <li v-for="(item, key) in history" :key="key">
+              {{ item }}
+            </li>
           </ul>
         </div>
       </div>
@@ -54,14 +56,39 @@
     Vue.createApp({
       data() {
         return {
-
+          result: 0,
+          num1: 0,
+          num2: 0,
+          cacheData: 0,
+          operator: 'add',
+          history: [],
         }
       },
       methods: {
-
-      },
-      mounted() {
-        
+        compute() {
+          switch (this.operator) {
+            case '+': 
+              this.result = this.num1 + this.num2
+              break
+            case '-':
+              this.result = this.num1 - this.num2
+              break
+            case '*':
+              this.result = this.num1 * this.num2
+              break
+            case '/':
+              this.result = this.num1 / this.num2
+              break
+            default:break
+          }
+          this.reset()
+        },
+        reset() {
+          this.history.push(`${this.num1} ${this.operator} ${this.num2} = ${this.result}`)
+          this.num1 = ''
+          this.num2 = ''
+          this.operator = '+'
+        },
       },
     }).mount('#app')
   </script>
