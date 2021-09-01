@@ -81,10 +81,15 @@
               break
             default:break
           }
+          // display in history
+          this.history.push(`${this.num1} ${this.operator} ${this.num2} = ${this.result}`)
+          // maintain 10 records
+          if (this.history.length > 10) {
+            this.history.splice(0, 1)
+          }
           this.reset()
         },
         reset() {
-          this.history.push(`${this.num1} ${this.operator} ${this.num2} = ${this.result}`)
           this.num1 = ''
           this.num2 = ''
           this.operator = '+'
