@@ -60,7 +60,7 @@
           num1: 0,
           num2: 0,
           cacheData: 0,
-          operator: 'add',
+          operator: '+',
           history: [],
         }
       },
@@ -87,6 +87,9 @@
           if (this.history.length > 10) {
             this.history.splice(0, 1)
           }
+          // storage in local
+          localStorage.setItem("MWmEWpv", JSON.stringify(this.history))
+
           this.reset()
         },
         reset() {
@@ -95,6 +98,9 @@
           this.operator = '+'
         },
       },
+      mounted() {
+        this.history = JSON.parse(localStorage.getItem("MWmEWpv")) || []
+      }
     }).mount('#app')
   </script>
 </body>
