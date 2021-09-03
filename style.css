@@ -1,0 +1,144 @@
+/* Inspired by https://dribbble.com/shots/6277344-Calculator */
+
+/* -- Index --
+1. global settings
+2. container
+3. layout
+    2-1 display results
+    2-2 digital panel
+    2-3 record
+4. button */
+
+/* global settings */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    color: white;
+    font-size: 16px;
+}
+
+/* container */
+.container {
+    width: 60vw;
+    margin: 0;
+    background-color: #000;
+    border-radius: 25px;
+}
+
+/* layout - display results */
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.display {
+    padding: 15px 15px 0 15px;
+}
+
+.text,
+.input {
+    text-align: right;
+}
+
+.input {
+    font-size: 48px;
+    background-color: black;
+    border: 0;
+    color: white;
+    font-family: inherit;
+}
+
+/* layout - digital panel */
+.flex {
+    display: flex;
+}
+
+.panel {
+    width: 30%;
+    padding: 15px;
+    border-radius: 0 0 25px 0;
+}
+
+/* layout - record */
+.record {
+    width: 70%;
+    padding: 15px;
+}
+.alignCenter {
+    align-items: center;
+}
+
+.justifyBetween {
+    justify-content: space-between;
+}
+
+/* button */
+.btn {
+    width: 25%;
+    height: 10vh;
+    background-color: #000;
+    border: none;
+    color: white;
+    font-size: 20px;
+    font-family: 'Roboto Mono', monospace;
+    cursor: pointer;
+}
+
+.fas {
+    color: white;
+    font-size: 20px;
+}
+
+.btn2x {
+    width: 50%;
+}
+
+.btn:active,
+.btn2x:active {
+    background-color: white;
+    color: black;
+}
+
+.btn-clear {
+    background-color: white;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* RWD */
+@media (max-width: 992px) {
+    .flex {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .panel {
+        width: 100%;
+    }
+    .record {
+        width: 100%;
+    }
+}
+
+@media (max-width: 375px) {
+    .container {
+        width: 100vw;
+    }
+    .panel,
+    .record {
+        padding: 0;
+        margin: 0;
+    }
+}
